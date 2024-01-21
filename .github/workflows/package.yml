@@ -11,7 +11,7 @@ jobs:
 
     steps:
       - name: Checkout code
-        uses: actions/checkout@v2
+        uses: actions/checkout@main
 
       - name: Set up Unreal Engine
         uses: GameCI/UnrealEngine-GitHub-Action@main
@@ -25,14 +25,14 @@ jobs:
           .\UnrealBuildTool.exe GGJ2024 Win64 Development -Package -Stage -Archive -archivedirectory=Artifacts -NoVerifyCookedPlatforms -Map=ThirdPersonMap
 
       - name: Upload package
-        uses: actions/upload-artifact@latest
+        uses: actions/upload-artifact@main
         with:
           name: packaged-artifacts
           path: Artifacts
 
       - name: Notify Discord
         if: always()  # This step will always run, even if previous steps fail
-        uses: fjogeleit/http-request-action@latest
+        uses: fjogeleit/http-request-action@main
         with:
           method: POST
           url: ${{ secrets.DISCORD_WEBHOOK_URL }}
