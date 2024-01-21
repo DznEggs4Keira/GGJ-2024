@@ -1,39 +1,22 @@
-name: Package GGJ 2024
+name: GGJ-2024 Build
 
 on:
   schedule:
-    - cron: '*/5 * * * *'  # Run every 5 minutes
-    #- cron: '0 * * * *'  # Run every 5 minutes
+    - cron: '*/1 * * * *'  # Run every 1 minutes
+    #- cron: '0 * * * *'  # Run every hour
 
 jobs:
-  package:
+  build:
     runs-on: windows-latest
 
     steps:
       - name: Checkout code
         uses: actions/checkout@main
-
-      - name: Set up Unreal Engine
-        uses: GameCI/GGJ-2024@main
-        with:
-          engine-version: '5.3.2'  # Use the desired Unreal Engine version
-
-      - name: Build and Package
-        run: |
-          .\Setup.bat
-          .\GenerateProjectFiles.bat
-          .\UnrealBuildTool.exe GGJ2024 Win64 Development -Package -Stage -Archive -archivedirectory=Artifacts -NoVerifyCookedPlatforms -Map=ThirdPersonMap
-
-      - name: Upload package
-        uses: actions/upload-artifact@main
-        with:
-          name: packaged-artifacts
-          path: Artifacts
-
+        
       - name: Notify Discord
-        if: always()  # This step will always run, even if previous steps fail
+        if: always()
         uses: fjogeleit/http-request-action@main
         with:
           method: POST
           url: ${{ secrets.DISCORD_WEBHOOK_URL }}
-          data: '{"content": "GitHub Actions workflow completed successfully for Unreal Engine 5!"}'
+          data: '{"content": "GitHub Actions workflow completed successfully for Unreal Engine 5.3.2!"}'
