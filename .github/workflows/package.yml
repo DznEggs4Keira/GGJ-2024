@@ -2,7 +2,10 @@ name: Package Unreal Project
 
 on:
   schedule:
-    - cron: '0 * * * *' # Run every hour
+    - cron: '*/5 * * * *' # Run every 5 mins
+    #- cron: '0 * * * *' # Run every hour
+    
+
 
 jobs:
   package:
