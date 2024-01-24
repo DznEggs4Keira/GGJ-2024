@@ -10,7 +10,7 @@ def package_project():
     # Command for packaging the project
     package_command = f'{unreal_path} {project_path} -run=AutomationTool -Script=BuildCookRun ' \
                       f'-nocompileeditor -nop4 -project={project_path} -cook -stage -archive -archivedirectory={output_path} ' \
-                      '-package -clientconfig=Development -ueexe=UnrealEditor-Cmd.exe -clean -pak -prereqs -nodebuginfo ' \
+                      '-package -clientconfig=Development -ue5exe=UnrealEditor-Cmd.exe -clean -pak -prereqs -nodebuginfo ' \
                       '-targetplatform=Windows'
 
     subprocess.run(package_command, shell=True)
