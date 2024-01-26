@@ -1,6 +1,9 @@
 # Visual Studio 2015 user specific files
 .vs/
 
+# Automated Builds Command
+.py
+
 # Compiled Object files
 *.slo
 *.lo
